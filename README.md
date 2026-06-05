@@ -1,5 +1,5 @@
 <h1 align="center">
-GlobeTrotter: AI-Powered Travel Planning &amp; <br> Group Trip Collaboration Platform
+AI-Powered Collaborative Travel Planning and <br> Group Trip Management Platform
 </h1>
 
 ---
@@ -7,12 +7,12 @@ GlobeTrotter: AI-Powered Travel Planning &amp; <br> Group Trip Collaboration Pla
 ## 📝 Abstract
 
 <div align="justify">
-GlobeTrotter is a full-stack AI-assisted travel planning web application designed to simplify how individuals and groups plan, organize, and manage trips. The platform integrates intelligent destination discovery, real-time flight search, cost estimation, and collaborative group trip management into a single cohesive experience.
+AtlasSync is a full-stack AI-assisted travel planning web application designed to simplify how individuals and groups plan, organize, and manage trips. The platform integrates intelligent destination discovery, real-time flight search, cost estimation, and collaborative group trip management into a single cohesive experience.
 </div>
 
 <br>
 <div align="justify">
-Built with Next.js 16 App Router and powered by a Supabase backend, GlobeTrotter enables users to search destinations, build personalized itineraries, split costs across travelers, and collaboratively vote on group destinations; all from a modern, responsive interface. The application is deployed on Vercel with server-side rendering safeguards and client-side data fetching to ensure performance and reliability.
+Built with Next.js 16 App Router and powered by a Supabase backend, AtlasSync enables users to search destinations, build personalized itineraries, split costs across travelers, and collaboratively vote on group destinations — all from a modern, responsive interface. The application is deployed on Vercel with server-side rendering safeguards and client-side data fetching to ensure performance and reliability.
 </div>
 
 ---
@@ -20,7 +20,7 @@ Built with Next.js 16 App Router and powered by a Supabase backend, GlobeTrotter
 ## 📁 Repository Structure
 
 ```bash
-globetrotter/
+atlassync/
 ├── src/
 │   ├── app/
 │   │   ├── (auth)/
@@ -112,6 +112,7 @@ The Supabase PostgreSQL database includes the following core tables:
 | `destination_votes` | Votes cast by group members on candidates |
 
 > Row Level Security (RLS) is enabled on all tables.
+
 ---
 
 ## ⚙️ Local Setup Instructions
@@ -125,8 +126,8 @@ The Supabase PostgreSQL database includes the following core tables:
 ### 2. Clone & Install
 
 ```bash
-git clone https://github.com/Bharadwaj-1953/GlobeTrotter-Live.git
-cd GlobeTrotter-Live
+git clone https://github.com/Bharadwaj-1953/AtlasSync.git
+cd AtlasSync
 npm install
 ```
 
@@ -201,11 +202,11 @@ Deployment is handled via Vercel with automatic builds triggered on every push t
 ## 📊 Experimental Results and Analysis
 
 - The application was tested across multiple deployment environments including local development (Windows) and Vercel's Linux-based production infrastructure
-- Key engineering challenges resolved include SSR/prerender compatibility with Supabase's JWT-based browser client, platform-specific npm binary conflicts (`@tailwindcss/oxide-win32-x64-msvc`), and dynamic routing with Next.js App Router
+- Key engineering challenges resolved include SSR/prerender compatibility with Supabase's JWT-based browser client, platform-specific npm binary conflicts, and dynamic routing with Next.js App Router
 - All pages use `force-dynamic` rendering and client-side data fetching via `useEffect` to ensure compatibility with Vercel's edge deployment model
 - The app handles group trips with real-time vote aggregation, live leaderboard ranking, and per-member participation tracking
 
-> If you would like to discuss the architecture, design decisions, or HCI evaluation in more detail, feel free to reach out.
+> If you would like to discuss the architecture, design decisions, or evaluation in more detail, feel free to reach out.
 
 ---
 
