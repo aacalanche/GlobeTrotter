@@ -7,12 +7,12 @@ AI-Powered Collaborative Travel Planning and <br> Group Trip Management Platform
 ## 📝 Abstract
 
 <div align="justify">
-AtlasSync is a full-stack AI-assisted travel planning web application designed to simplify how individuals and groups plan, organize, and manage trips. The platform integrates intelligent destination discovery, real-time flight search, cost estimation, and collaborative group trip management into a single cohesive experience.
+GlobeTrotter is a full-stack AI-assisted travel planning web application designed to simplify how individuals and groups plan, organize, and manage trips. The platform integrates intelligent destination discovery, real-time flight search, cost estimation, and collaborative group trip management into a single cohesive experience.
 </div>
 
 <br>
 <div align="justify">
-Built with Next.js 16 App Router and powered by a Supabase backend, AtlasSync enables users to search destinations, build personalized itineraries, split costs across travelers, and collaboratively vote on group destinations — all from a modern, responsive interface. The application is deployed on Vercel with server-side rendering safeguards and client-side data fetching to ensure performance and reliability.
+Built with Next.js 16 App Router and powered by a Supabase backend, GlobeTrotter enables users to search destinations, build personalized itineraries, split costs across travelers, and collaboratively vote on group destinations — all from a modern, responsive interface. The application is deployed on Vercel with server-side rendering safeguards and client-side data fetching to ensure performance and reliability.
 </div>
 
 ---
@@ -20,7 +20,7 @@ Built with Next.js 16 App Router and powered by a Supabase backend, AtlasSync en
 ## 📁 Repository Structure
 
 ```bash
-atlassync/
+GlobeTrotter/
 ├── src/
 │   ├── app/
 │   │   ├── (auth)/
@@ -126,8 +126,8 @@ The Supabase PostgreSQL database includes the following core tables:
 ### 2. Clone & Install
 
 ```bash
-git clone https://github.com/Bharadwaj-1953/AtlasSync.git
-cd AtlasSync
+git clone https://github.com/aacalanche/GlobeTrotter.git
+cd GlobeTrotter
 npm install
 ```
 
