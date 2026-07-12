@@ -1,5 +1,6 @@
 'use client'
 
+export const dynamic = 'force-dynamic'
 
 import { useState, useEffect } from 'react'
 import { useRouter, useParams } from 'next/navigation'
@@ -787,4 +788,8 @@ export default function TripDetailPage() {
               </Link>
             </div>
           </div>
-     
+        </div>
+      </div>
+    </div>
+  )
+}
