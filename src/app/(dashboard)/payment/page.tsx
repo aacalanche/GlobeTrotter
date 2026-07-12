@@ -168,6 +168,18 @@ function PaymentPageInner() {
         </div>
       </div>
 
+      <div className="max-w-5xl mx-auto px-4 pt-6">
+        <div className="flex items-start gap-3 bg-amber-50 border-2 border-amber-300 rounded-xl p-4">
+          <AlertCircle className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
+          <div>
+            <p className="text-sm font-bold text-amber-900">Demo checkout — do not enter real card details</p>
+            <p className="text-xs text-amber-700 mt-0.5">
+              This is a portfolio demo. No payment is processed and no data is stored or sent anywhere. Use placeholder values (e.g. 4242 4242 4242 4242).
+            </p>
+          </div>
+        </div>
+      </div>
+
       <div className="max-w-5xl mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-5 gap-8">
 
         {/* LEFT — Payment Form */}
