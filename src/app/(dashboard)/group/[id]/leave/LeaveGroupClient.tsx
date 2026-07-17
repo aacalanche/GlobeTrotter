@@ -1,5 +1,6 @@
 'use client'
 
+export const dynamic = 'force-dynamic'
 
 import { useState, useEffect } from 'react'
 import { useRouter, useParams } from 'next/navigation'
@@ -139,4 +140,8 @@ export default function LeaveGroupPage() {
             <ArrowLeft className="w-3.5 h-3.5" />
             Go back
           </button>
-     
+        </div>
+      </div>
+    </div>
+  )
+}

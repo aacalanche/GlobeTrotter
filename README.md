@@ -51,17 +51,18 @@ GlobeTrotter/
 │   │   ├── layout.tsx                  # Root layout with global providers
 │   │   └── page.tsx                    # Landing/root redirect page
 │   ├── components/
-│   │   ├── layout/                     # Shared layout components (navbar, sidebar)
-│   │   └── ui/                         # Reusable UI components
+│   │   └── layout/                     # Shared layout components (navbar, footer)
 │   ├── lib/
 │   │   ├── supabase/
-│   │   │   └── client.ts               # Supabase browser client (SSR-safe)
-│   │   ├── data/                       # Static data (destinations, itineraries)
+│   │   │   ├── client.ts               # Supabase browser client (SSR-safe)
+│   │   │   └── server.ts               # Supabase server client
+│   │   ├── data/                       # Static data (destinations, hotels, activities, transport)
 │   │   └── utils.ts                    # Shared utility functions
-│   └── types/
-│       └── index.ts                    # TypeScript type definitions
+│   ├── types/
+│   │   └── index.ts                    # TypeScript type definitions
+│   └── proxy.ts                        # Auth session refresh (Next.js proxy/middleware)
 ├── public/                             # Static assets
-├── SETUP_DATABASE.sql                  # Supabase schema setup script
+├── .env.example                        # Environment variable template
 ├── supabase_schema.sql                 # Full database schema with RLS policies
 ├── next.config.ts                      # Next.js configuration
 ├── tsconfig.json                       # TypeScript configuration
@@ -92,7 +93,7 @@ GlobeTrotter/
 - **Language**: TypeScript 5
 - **Frontend**: React 19, Tailwind CSS v4, Framer Motion, Lucide React
 - **Backend & Auth**: Supabase (PostgreSQL + Row Level Security + Auth)
-- **Deployment**: Vercel (Live at [globetrotter-phi-gilt.vercel.app](https://globetrotter-phi-gilt.vercel.app))
+- **Deployment**: Vercel (_deployment link coming soon_)
 - **Package Manager**: npm
 - **Dev Tools**: ESLint, PostCSS
 
@@ -106,10 +107,10 @@ The Supabase PostgreSQL database includes the following core tables:
 |-------|-------------|
 | `profiles` | User profile data linked to Supabase auth |
 | `trips` | Individual trip records with destination, dates, budget |
-| `group_trips` | Group trip metadata and membership |
+| `trip_activities` | Activities scheduled within a trip |
+| `group_trips` | Group trip metadata, status, and winning destination |
 | `group_members` | Many-to-many relationship of users in group trips |
-| `destination_candidates` | Candidate destinations proposed for group trips |
-| `destination_votes` | Votes cast by group members on candidates |
+| `destination_votes` | Votes cast by group members on destinations (one vote per member) |
 
 > Row Level Security (RLS) is enabled on all tables.
 
@@ -133,12 +134,15 @@ npm install
 
 ### 3. Environment Variables
 
-Create a `.env.local` file in the project root:
+Copy the provided template and fill in your Supabase project values (Supabase Dashboard → Settings → API):
+
+```bash
+cp .env.example .env.local
+```
 
 ```env
-NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
-NEXT_PUBLIC_SITE_URL=http://localhost:3000
+NEXT_PUBLIC_SUPABASE_URL=https://your-project-ref.supabase.co
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=sb_publishable_...
 ```
 
 ### 4. Database Setup
@@ -161,9 +165,7 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## 🌐 Live Deployment
 
-The application is deployed and accessible at:
-
-**[https://globetrotter-phi-gilt.vercel.app](https://globetrotter-phi-gilt.vercel.app)**
+_Deployment link coming soon._
 
 Deployment is handled via Vercel with automatic builds triggered on every push to the main branch of the GitHub repository.
 
@@ -183,6 +185,7 @@ Deployment is handled via Vercel with automatic builds triggered on every push t
 | `/group/[id]/vote` | Vote on group destination candidates |
 | `/group/[id]/itinerary` | AI-generated itinerary for the top destination |
 | `/group/[id]/join` | Join a group trip via invite link |
+| `/group/[id]/leave` | Leave a group trip |
 | `/payment` | Trip booking and payment confirmation |
 | `/profile` | User profile settings |
 | `/login` | Sign in page |
@@ -195,13 +198,13 @@ Deployment is handled via Vercel with automatic builds triggered on every push t
 - User authentication is handled entirely through Supabase Auth (email/password + OAuth)
 - All database tables are protected with Row Level Security (RLS) policies — users can only access their own data
 - Invite links for group trips use secure UUID-based group IDs
-- Environment variables (Supabase keys) are never exposed client-side beyond the public anon key
+- Environment variables (Supabase keys) are never exposed client-side beyond the public publishable key
 
 ---
 
 ## 📊 Experimental Results and Analysis
 
-- The application was tested across multiple deployment environments including local development (Windows) and Vercel's Linux-based production infrastructure
+- The application was tested across multiple deployment environments including local development and Vercel's Linux-based production infrastructure
 - Key engineering challenges resolved include SSR/prerender compatibility with Supabase's JWT-based browser client, platform-specific npm binary conflicts, and dynamic routing with Next.js App Router
 - All pages use `force-dynamic` rendering and client-side data fetching via `useEffect` to ensure compatibility with Vercel's edge deployment model
 - The app handles group trips with real-time vote aggregation, live leaderboard ranking, and per-member participation tracking
@@ -212,5 +215,7 @@ Deployment is handled via Vercel with automatic builds triggered on every push t
 
 ## 🌐 Contact
 
-- **Email**: manne.bharadwaj.1953@gmail.com
-- **LinkedIn**: [Bharadwaj Manne](https://www.linkedin.com/in/bharadwaj-manne-711476249/)
+Maintained by **Arturo Calanche**.
+
+- **Email**: arturo.calanche@gmail.com
+- **GitHub**: [aacalanche](https://github.com/aacalanche)
