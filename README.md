@@ -93,7 +93,7 @@ GlobeTrotter/
 - **Language**: TypeScript 5
 - **Frontend**: React 19, Tailwind CSS v4, Framer Motion, Lucide React
 - **Backend & Auth**: Supabase (PostgreSQL + Row Level Security + Auth)
-- **Deployment**: Vercel (_deployment link coming soon_)
+- **Deployment**: Vercel ([globetrotter-woad-nine.vercel.app](https://globetrotter-woad-nine.vercel.app))
 - **Package Manager**: npm
 - **Dev Tools**: ESLint, PostCSS
 
@@ -165,7 +165,7 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## 🌐 Live Deployment
 
-_Deployment link coming soon._
+**Live app:** [https://globetrotter-woad-nine.vercel.app](https://globetrotter-woad-nine.vercel.app)
 
 Deployment is handled via Vercel with automatic builds triggered on every push to the main branch of the GitHub repository.
 
