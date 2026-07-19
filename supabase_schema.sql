@@ -133,6 +133,17 @@ $$;
 grant execute on function public.is_group_member(uuid, uuid) to authenticated;
 
 -- ------------------------------------------------------------
+-- Table privileges
+-- (RLS below constrains rows; these grant base access. anon gets
+-- nothing: the app requires login for all data access.)
+-- ------------------------------------------------------------
+
+grant usage on schema public to authenticated;
+grant select, insert, update, delete on
+  profiles, trips, trip_activities, group_trips, group_members, destination_votes
+to authenticated;
+
+-- ------------------------------------------------------------
 -- Row Level Security
 -- ------------------------------------------------------------
 
