@@ -6,7 +6,7 @@ export async function GET(req: NextRequest) {
 
   try {
     // No featuretype filter — broader search so US cities like "Orlando", "Austin" etc. all appear
-    const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(query)}&format=json&addressdetails=1&limit=25`
+    const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(query)}&format=json&addressdetails=1&limit=25&accept-language=en`
     const res = await fetch(url, {
       headers: { 'User-Agent': 'Globetrotter-TravelApp/1.0 contact@globetrotter.app' },
       next: { revalidate: 3600 },
@@ -40,13 +40,15 @@ export async function GET(req: NextRequest) {
         const state       = item.address?.state || item.address?.region || ''
 
         return { city, country, countryCode, state, type, cls,
+          rank: item.place_rank || 0,
           lat: parseFloat(item.lat), lon: parseFloat(item.lon),
           placeId: item.place_id, importance: item.importance || 0 }
       })
       .filter((r: any) => {
         if (!r.city || !r.country) return false
-        // Keep real settlements; skip raw admin boundaries that aren't cities
-        if (r.cls === 'boundary' && !GOOD_TYPES.has(r.type)) return false
+        // Major cities come back as boundary/administrative (Tokyo, Paris, NYC all do);
+        // place_rank >= 8 keeps city-level boundaries while excluding countries (~4) and large regions
+        if (r.cls === 'boundary' && !GOOD_TYPES.has(r.type) && !(r.type === 'administrative' && r.rank >= 8)) return false
         // Deduplicate by city+country
         const key = `${r.city.toLowerCase()}-${r.country.toLowerCase()}`
         if (seen.has(key)) return false
