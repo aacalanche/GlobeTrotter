@@ -72,7 +72,8 @@ create table if not exists group_trips (
 create table if not exists group_members (
   id uuid default gen_random_uuid() primary key,
   group_trip_id uuid references group_trips(id) on delete cascade not null,
-  user_id uuid references auth.users(id) on delete cascade not null,
+  -- references profiles (not auth.users) so PostgREST can embed profile data
+  user_id uuid references profiles(id) on delete cascade not null,
   personal_budget integer,
   role text default 'member' check (role in ('organizer', 'member')),
   joined_at timestamp with time zone default timezone('utc'::text, now()) not null,
